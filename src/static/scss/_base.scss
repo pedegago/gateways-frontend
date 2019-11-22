@@ -1,0 +1,30 @@
+main {
+    @extend .container;
+}
+
+td:last-child {
+    width: 1px;
+    white-space: nowrap;
+
+    button:not(:last-child) {
+        margin-right: 12px;
+    }
+}
+
+h2 {
+    @extend
+        .h5,
+        .mb-4,
+        .text-secondary,
+        .font-weight-normal;
+}
+
+#root {
+    @extend .d-flex, .flex-column;
+
+    min-height: 100vh;
+
+    main {
+        @extend .mb-auto;
+    }
+}

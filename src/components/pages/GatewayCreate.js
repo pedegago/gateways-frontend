@@ -1,3 +1,6 @@
+/**
+ * Required modules.
+ */
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createGateway } from "../../actions/actions";
@@ -5,7 +8,12 @@ import { FormGroup, Button } from "reactstrap";
 import GatewayForm from "../base/GatewayForm";
 import useAlert from "../hooks/useAlert";
 
+/**
+ * This page renders a form for adding gateways
+ * to database.
+ */
 const GatewayCreate = () => {
+    // Required hooks.
     const [loading, isLoading] = useState();
     const [alert, showAlert] = useAlert();
 
@@ -23,6 +31,7 @@ const GatewayCreate = () => {
                                 submit(e, () => {
                                     isLoading(true);
 
+                                    // Dispatching action for creating the new gateway.
                                     dispatch(
                                         createGateway(serial, name, ipv4)
                                     ).then((res) => {
@@ -50,4 +59,7 @@ const GatewayCreate = () => {
     );
 };
 
+/**
+ * Exporting component
+ */
 export default GatewayCreate;

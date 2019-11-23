@@ -1,3 +1,6 @@
+/**
+ * Required modules.
+ */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGateways } from "../../actions/actions";
@@ -7,6 +10,12 @@ import GatewayRow from "../base/GatewayRow";
 import useAlert from "../hooks/useAlert";
 import Loading from "../base/Loading";
 
+
+/**
+ * This page renders table with the information
+ * of all gateways and shows basic options over
+ * each row.
+ */
 const Dashboard = () => {
     const [loading, isLoading] = useState(true);
     const [alert, showAlert] = useAlert();
@@ -14,8 +23,11 @@ const Dashboard = () => {
     const dispatch = useDispatch();
     const gateways = useSelector((state) => state.gateways);
 
+    // Fetching all gateways in first render,
+    // and storing it into global store.
     useEffect(() => {
         dispatch(getAllGateways()).then((e) => {
+            // Show an alert with errors.
             if (!e.status)
                 showAlert(
                     e,
@@ -27,6 +39,8 @@ const Dashboard = () => {
         });
     }, [dispatch]);
 
+    // This functions will be called for children
+    // in order to show when a row was or not removed.
     const removed = (res) => {
         showAlert(
             res,
@@ -41,7 +55,7 @@ const Dashboard = () => {
             {loading ? (
                 <Loading />
             ) : (
-                <Table borderless hover responsive>
+                <Table borderless hover responsive striped>
                     <thead>
                         <tr>
                             <th>Serial</th>
@@ -71,4 +85,7 @@ const Dashboard = () => {
     );
 };
 
+/**
+ * Exporting component
+ */
 export default Dashboard;

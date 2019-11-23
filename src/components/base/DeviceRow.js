@@ -1,13 +1,23 @@
+/**
+ * Required modules.
+ */
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeDevice } from "../../actions/actions";
 import { Button } from "reactstrap";
 
-const GatewayRow = ({ gateway, device, removed }) => {
+/**
+ * Renders a row inside the table of devices from
+ * gateway details page. Make basic actions such as remove
+ * the device.
+ */
+const DeviceRow = ({ gateway, device, removed }) => {
     const [loading, isLoading] = useState();
 
     const dispatch = useDispatch();
 
+    // Dispatch action for calling endpoint in order
+    // to remove this device.
     const removeIt = () => {
         isLoading(true);
 
@@ -61,4 +71,7 @@ const GatewayRow = ({ gateway, device, removed }) => {
     );
 };
 
-export default GatewayRow;
+/**
+ * Exporting component
+ */
+export default DeviceRow;

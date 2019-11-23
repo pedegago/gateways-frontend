@@ -1,3 +1,6 @@
+/**
+ * Defines all actions types.
+ */
 export default {
     FETCH_ALL_GATEWAYS: "FETCH_ALL_GATEWAYS",
     REMOVE_GATEWAY: "REMOVE_GATEWAY",

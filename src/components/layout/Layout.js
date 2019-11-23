@@ -1,3 +1,6 @@
+/**
+ * Required modules.
+ */
 import React from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../utils/routes";
@@ -8,6 +11,10 @@ import GatewayCreate from "../pages/GatewayCreate";
 import GatewayDetails from "../pages/GatewayDetails";
 import DeviceCreate from "../pages/DeviceCreate";
 
+/**
+ * Defines the basic layout of all aplication.
+ * Also defines all routes.
+ */
 const Layout = () => {
     return (
         <>
@@ -36,4 +43,7 @@ const Layout = () => {
     );
 };
 
+/**
+ * Exporting component
+ */
 export default Layout;

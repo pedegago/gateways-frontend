@@ -1,5 +1,11 @@
+/**
+ * Required modules.
+ */
 import React from "react";
 
+/**
+ * Renders the footer of all aplication.
+ */
 const Footer = () => {
     return (
         <footer>
@@ -14,4 +20,7 @@ const Footer = () => {
     );
 };
 
+/**
+ * Exporting component
+ */
 export default Footer;

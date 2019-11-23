@@ -1,3 +1,6 @@
+/**
+ * Required modules.
+ */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGateways } from "../../actions/actions";
@@ -8,6 +11,12 @@ import useAlert from "../hooks/useAlert";
 import _ from "lodash";
 import Loading from "./Loading";
 
+/**
+ * Creates a validator object for
+ * managing all validations in the form.
+ * This class receives the criterials for
+ * validations.
+ */
 const validator = new FormValidator([
     {
         field: "vendor",
@@ -23,11 +32,19 @@ const validator = new FormValidator([
     }
 ]);
 
+/**
+ * This component renders input controls
+ * for managing devices, but all operations
+ * with those datas are managed via render
+ * props for other components.
+ */
 const DeviceForm = ({ children, title }) => {
+    // Attributes of a device.
     const [online, isOnline] = useState(true);
     const [vendor, setVendor] = useState("");
     const [gateway, setGateway] = useState("");
 
+    // Required hooks.
     const [submited, isSubmited] = useState();
     const [loading, isLoading] = useState(true);
     const [alert, showAlert] = useAlert();
@@ -35,8 +52,11 @@ const DeviceForm = ({ children, title }) => {
     const dispatch = useDispatch();
     const gateways = useSelector((state) => state.gateways);
 
+    // Fetching all gateways in first render,
+    // and storing it into global store.
     useEffect(() => {
         dispatch(getAllGateways()).then((e) => {
+            // Show an alert with errors.
             if (!e.status)
                 showAlert(
                     e,
@@ -54,10 +74,14 @@ const DeviceForm = ({ children, title }) => {
             gateway
         });
 
+    // Validator variable.
     const _validate = submited
         ? validate()
         : validator.valid();
 
+    // Vía render props all components will
+    // be able to proceed to processing own
+    // actions with this function.
     const submit = (e, action) => {
         e.preventDefault();
 
@@ -67,6 +91,8 @@ const DeviceForm = ({ children, title }) => {
             action();
     };
 
+    // Vía render props all componetns will
+    // be able to reset all fields in this form.
     const reset = () => {
         isSubmited();
 
@@ -125,9 +151,13 @@ const DeviceForm = ({ children, title }) => {
                     )
                 }
             </FormGroup>
+            {/* Exposing all fields and main actions. */}
             {children(gateway, online, vendor, submit, reset)}
         </form>
     );
 };
 
+/**
+ * Exporting component
+ */
 export default DeviceForm;

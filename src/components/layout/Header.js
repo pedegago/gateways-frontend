@@ -1,7 +1,13 @@
+/**
+ * Required modules.
+ */
 import React from "react";
 import { useHistory } from "react-router-dom";
 import * as routes from "../../utils/routes";
 
+/**
+ * Renders the header of all application.
+ */
 const Header = () => {
     let history = useHistory();
 
@@ -37,4 +43,7 @@ const Header = () => {
     );
 };
 
+/**
+ * Exporting component
+ */
 export default Header;

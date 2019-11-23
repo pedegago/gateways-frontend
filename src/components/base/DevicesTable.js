@@ -1,3 +1,6 @@
+/**
+ * Required modules.
+ */
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getDevices } from "../../actions/actions";
@@ -6,12 +9,18 @@ import _ from "lodash";
 import DeviceRow from "./DeviceRow";
 import Loading from "./Loading";
 
+/**
+ * This component renders table with the information
+ * of all devices of specific gateway and shows basic options
+ * over each row.
+ */
 const DevicesTable = ({ gateway, alert }) => {
     const [devices, setDevices] = useState([]);
     const [loading, isLoading] = useState(true);
 
     const dispatch = useDispatch();
 
+    // Fetching all devices of specific gateway.
     useEffect(() => {
         dispatch(getDevices(gateway)).then((e) => {
             if (!e.status)
@@ -27,6 +36,8 @@ const DevicesTable = ({ gateway, alert }) => {
         });
     }, [dispatch, setDevices, gateway]);
 
+    // This functions will be called for children
+    // in order to show when a row was or not removed.
     const removed = (id, res) => {
         setDevices([
             ..._.filter(devices, (d) =>
@@ -43,7 +54,7 @@ const DevicesTable = ({ gateway, alert }) => {
             {loading ? (
                 <Loading />
             ) : (
-                <Table borderless hover responsive>
+                <Table borderless hover responsive striped>
                     <thead>
                         <tr>
                             <th>Vendor</th>
@@ -74,4 +85,7 @@ const DevicesTable = ({ gateway, alert }) => {
     );
 };
 
+/**
+ * Exporting component
+ */
 export default DevicesTable;

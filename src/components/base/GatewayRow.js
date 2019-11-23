@@ -1,3 +1,6 @@
+/**
+ * Required modules.
+ */
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeGateway } from "../../actions/actions";
@@ -6,12 +9,19 @@ import { useHistory } from "react-router-dom";
 import * as routes from "../../utils/routes";
 import _ from "lodash";
 
+/**
+ * Renders a row inside the table of gateways from
+ * home page. Make basic actions such as to navigate
+ * to gateway details page and remove the gateway.
+ */
 const GatewayRow = ({ gateway, removed }) => {
     const [loading, isLoading] = useState();
 
     const dispatch = useDispatch();
     let history = useHistory();
 
+    // Dispatch action for calling endpoint in order
+    // to remove this gateway.
     const removeIt = () => {
         isLoading(true);
 
@@ -62,4 +72,7 @@ const GatewayRow = ({ gateway, removed }) => {
     );
 };
 
+/**
+ * Exporting component
+ */
 export default GatewayRow;

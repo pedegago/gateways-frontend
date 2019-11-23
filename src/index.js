@@ -11,6 +11,10 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import combineReducers from "./reducers/combineReducers";
 import { BrowserRouter as Router } from "react-router-dom";
 import Layout from "./components/layout/Layout";
+
+/**
+ * Required styles.
+ */
 import "./static/scss/app.scss";
 
 /**

@@ -1,7 +1,10 @@
+/**
+ * Required modules.
+ */
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { getGateway, updateGateway } from "../../actions/actions";
+import { getGateway, updateGateway, removeGateway } from "../../actions/actions";
 import { FormGroup, Button, Row, Col } from "reactstrap";
 import * as routes from "../../utils/routes";
 import GatewayForm from "../base/GatewayForm";
@@ -9,7 +12,13 @@ import useAlert from "../hooks/useAlert";
 import DevicesTable from "../base/DevicesTable";
 import _ from "lodash";
 
+/**
+ * This page show all availables devices for a
+ * gateway. It shows also the form for updating
+ * the gateway information.
+ */
 const GatewayDetails = () => {
+    // Required hooks.
     const [gateway, setGateway] = useState();
     const [fetchingGateway, setFetchingGateway] = useState(true);
     const [loading, isLoading] = useState();
@@ -19,6 +28,8 @@ const GatewayDetails = () => {
     const params = useParams();
     const dispatch = useDispatch();
 
+    // This effect dispatch action in order to
+    // get infromation of specified gateway.
     useEffect(() => {
         dispatch(getGateway(params.serial)).then((e) => {
             if (!e.status)
@@ -35,10 +46,11 @@ const GatewayDetails = () => {
         <article>
             {alert}
             <h2>Details of Gateway {params.serial}</h2>
-            <Row>
+            <Row className="align-items-start">
                 {!fetchingGateway && gateway &&
                     (
                         <Col lg={4} className="pt-3 mb-4 border order-lg-1">
+                            {/* Renders the gateway form for updating it values. */}
                             <GatewayForm
                                 _serial={gateway.serial}
                                 _name={gateway.name}
@@ -83,6 +95,7 @@ const GatewayDetails = () => {
                     )
                 }
                 <Col>
+                    {/* Renders the device's table */}
                     <DevicesTable
                         gateway={params.serial}
                         alert={(res, successMessage, errorMessage) => {
@@ -99,4 +112,7 @@ const GatewayDetails = () => {
     );
 };
 
+/**
+ * Exporting component
+ */
 export default GatewayDetails;

@@ -1,7 +1,16 @@
+/**
+ * Required modules.
+ */
 import React, { useState } from "react";
 import FormValidator from "../../utils/FormValidator";
 import FormGroup from "./FormGroup";
 
+/**
+ * Creates a validator object for
+ * managing all validations in the form.
+ * This class receives the criterials for
+ * validations.
+ */
 const validator = new FormValidator([
     {
         field: "serial",
@@ -24,7 +33,14 @@ const validator = new FormValidator([
     }
 ]);
 
+/**
+ * This component renders input controls
+ * for managing gateways, but all operations
+ * with those datas are managed via render
+ * props for other components.
+ */
 const GatewayForm = ({ children, _serial, _name, _ipv4, title }) => {
+    // Attributes of a gateway and required hooks.
     const [serial, setSerial] = useState(_serial || "");
     const [name, setName] = useState(_name || "");
     const [ipv4, setIpv4] = useState(_ipv4 || "");
@@ -38,10 +54,14 @@ const GatewayForm = ({ children, _serial, _name, _ipv4, title }) => {
             ipv4
         });
 
+    // Validator variable.
     const _validate = submited
         ? validate()
         : validator.valid();
 
+    // Vía render props all components will
+    // be able to proceed to processing own
+    // actions with this function.
     const submit = (e, action) => {
         e.preventDefault();
 
@@ -51,6 +71,8 @@ const GatewayForm = ({ children, _serial, _name, _ipv4, title }) => {
             action();
     };
 
+    // Vía render props all componetns will
+    // be able to reset all fields in this form.
     const reset = () => {
         isSubmited();
 
@@ -83,9 +105,13 @@ const GatewayForm = ({ children, _serial, _name, _ipv4, title }) => {
                 onChange={(e) => { setIpv4(e.target.value) }}
                 validator={_validate}
             />
+            {/* Exposing all fields and main actions. */}
             {children(serial, name, ipv4, submit, reset)}
         </form>
     );
 };
 
+/**
+ * Exporting component
+ */
 export default GatewayForm;

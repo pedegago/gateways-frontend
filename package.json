@@ -6,9 +6,12 @@
     "node": "10.16.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "author": "Pablo David Gago Ballester",
   "license": "ISC",
@@ -26,6 +29,7 @@
     "redux": "^4.0.4",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
+    "serve": "^11.2.0",
     "validator": "^12.1.0"
   },
   "browserslist": {
